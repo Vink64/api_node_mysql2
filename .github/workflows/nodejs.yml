@@ -31,7 +31,7 @@ jobs:
       run: sudo /etc/init.d/mysql start
     - name: Install client mysql
       run: apt install mysql-client
-      - name: Criar tabelas
+    - name: Criar tabelas
       run: mysql -h localhost -u root -p giasfelfebrehber usersdb < estrutura.sql
     - name: Run tests
       run: npm test
