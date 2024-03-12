@@ -13,6 +13,14 @@ const connection = mysql.createConnection({
   database: 'usersdb'
 });
 
+/*const connection = mysql.createConnection({
+  host: 'localhost',
+  user: process.env.MYSQL_USER, // Usa variáveis de ambiente
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
+});*/
+
+
 // Conectar ao banco de dados
 connection.connect((err) => {
   if (err) throw err;
@@ -51,3 +59,9 @@ app.get('/users/:id', (req, res) => {
     res.json(results);
   });
 });
+
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
+
+module.exports = app;
