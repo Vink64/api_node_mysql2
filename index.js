@@ -37,19 +37,33 @@ app.post('/users', (req, res) => {
   });
 });
 
-// Obter todos os usuários
-app.get('/users', (req, res) => {
-  connection.query('SELECT * FROM users', (err, results) => {
-    if (err) throw err;
-    res.json(results);
-  });
-});
-
 // Obter um usuário por ID
 app.get('/users/:id', (req, res) => {
   const userId = req.params.id;
   const SELECT_USER_QUERY = `SELECT * FROM users WHERE id = ?`;
   connection.query(SELECT_USER_QUERY, [userId], (err, results) => {
+    if (err) throw err;
+    res.statusCode=204;
+    res.json(results);
+  });
+});
+
+// Atualizar usuário por id
+app.put('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  const { name, email } = req.body;
+  const UPDATE_USER_QUERY = `UPDATE users set name=?,email=? WHERE id = ?`;
+  connection.query(UPDATE_USER_QUERY, [name,email,userId], (err, results) => {
+    if (err) throw err;
+    res.statusCode=204;
+    res.json(results);
+  });
+});
+
+app.delete('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  const DELETE_USER_QUERY = `'Delete FROM users WHERE id=?'`;
+  connection.query(DELETE_USER_QUERY,[userId], (err, results) => {
     if (err) throw err;
     res.json(results);
   });
