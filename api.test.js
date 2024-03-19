@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 const {app,server,connection} = require('./index.js'); // Importe seu aplicativo Express
 
-describe('Teste GET /users', () => {
+describe('Teste Get /users', () => {
   it('deve responder com status 200', async () => {
     const response = await supertest(app).get('/users');
     expect(response.statusCode).toBe(200);
@@ -14,11 +14,25 @@ describe('Teste GET /users', () => {
   });
 });
 
-describe('Teste POST /users', () => {
+describe('Teste Post /users', () => {
   it('deve responder com status 201', async () => {
     const response = await supertest(app).post('/users').send({name: "Juninho",email: "juninhodograu@gmail.com"});
     expect(response.statusCode).toBe(201);
     
+  });
+});
+
+describe('Atualiza usuario Put /users', () => {
+  it('deve responder com status 204', async () => {
+    const response = await supertest(app).post('/users/1').put({name: "Juninho",email: "juninhodograu@gmail.com"});
+    expect(response.statusCode).toBe(204);
+  });
+});
+
+describe('Deleta usuario Delete /users', () => {
+  it('deve responder com status 204', async () => {
+    const response = await supertest(app).post('/users/1').delete({name: "Juninho",email: "juninhodograu@gmail.com"});
+    expect(response.statusCode).toBe(204);
   });
 });
 
