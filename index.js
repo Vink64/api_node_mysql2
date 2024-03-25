@@ -41,6 +41,14 @@ app.post('/users', (req, res) => {
   });
 });
 
+// Obter todos os usuários
+app.get('/users', (req, res) => {
+  connection.query('SELECT * FROM users', (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 // Obter um usuário por ID
 app.get('/users/:id', (req, res) => {
   const userId = req.params.id;
